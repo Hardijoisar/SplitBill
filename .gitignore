@@ -1,0 +1,13 @@
+# macOS custom attributes file
+.DS_store
+
+# Folder for testing purpose
+/testing
+
+# css/*
+
+# !css/splitbill.min.css
+
+# js/*
+
+# !js/splitbill.min.js

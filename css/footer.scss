@@ -1,0 +1,41 @@
+// footer.scss
+
+#root {
+    .footer {
+        position: fixed;
+        bottom: 0;
+        height: 52px;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        background-color: var(--body-color);
+
+        .content {
+            width: var(--width-percent);
+            max-width: var(--max-width);
+            display: flex;
+            // flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            a {
+                text-align: center;
+                text-decoration: none;
+                color: var(--text-sec);
+                padding: 2px;
+                border-radius: var(--edge-radius);
+                &:hover {
+                    background-color: var(--hover-color);
+                }
+            }
+
+            .vertical-line {
+                height: 64%;
+                width: 1.6px;
+                border-radius: 2px;
+                background-color: var(--text-sec);
+            }
+        }
+    }
+}

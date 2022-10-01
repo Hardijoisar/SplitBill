@@ -1,0 +1,178 @@
+#root .split-bill {
+  margin: 6px 0;
+  width: var(--width-percent);
+  max-width: var(--max-width);
+}
+#root .split-bill .icon-info {
+  display: flex;
+}
+#root .split-bill .icon-info #add-icon {
+  border: none;
+  background-color: transparent;
+  color: var(--text-sec);
+  border-radius: var(--edge-radius);
+  margin-right: 16px;
+  border: 1px solid var(--hover-color);
+}
+#root .split-bill .icon-info #add-icon.no-image {
+  border: 1px solid var(--hover-color);
+}
+#root .split-bill .icon-info #add-icon.no-image:hover {
+  background-color: var(--hover-color);
+}
+#root .split-bill .icon-info #add-icon.has-image {
+  --icon-size: 80px;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  font-size: 0;
+  background-color: var(--hover-color);
+  background-image: url("https://opengraph.githubassets.com/1/patelka2211/Colab_plus_plus");
+  background-size: cover;
+}
+#root .split-bill .icon-info #add-icon:hover {
+  cursor: pointer;
+}
+#root .split-bill .icon-info .icon-options {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: calc(100% - 80px);
+  max-width: 230px;
+}
+#root .split-bill .icon-info .icon-options input {
+  color: var(--text-pri);
+  width: 100%;
+  padding: 4px 0;
+  padding-left: 4px;
+  margin-bottom: 4px;
+  background-color: transparent;
+  border: 1.6px solid var(--hover-color);
+  border-radius: var(--edge-radius);
+}
+#root .split-bill .icon-info .icon-options input:focus {
+  border: 1.6px solid transparent;
+  outline: 1.6px solid var(--btn-color);
+}
+#root .split-bill .icon-info .icon-options .btns button {
+  border: 1px solid var(--hover-color);
+  border-radius: var(--edge-radius);
+  background-color: transparent;
+  color: var(--text-sec);
+  border-radius: var(--edge-radius);
+}
+#root .split-bill .icon-info .icon-options .btns button:hover {
+  cursor: pointer;
+}
+#root .split-bill .icon-info .icon-options .btns .remove-btn {
+  border-color: var(--alert-color);
+  color: var(--alert-color);
+}
+#root .split-bill .icon-info .icon-options .btns .save-image-btn {
+  border-color: var(--btn-color);
+  color: var(--btn-color);
+}
+#root .split-bill .icon-info .icon-options.hide {
+  display: none;
+}
+#root .split-bill #splitbill-title {
+  background-color: var(--body-color);
+  color: var(--text-pri);
+  font-size: 32px;
+  margin: 16px 0;
+  width: 100%;
+  border: none;
+}
+#root .split-bill #splitbill-title:focus {
+  border: none;
+  outline: none;
+}
+#root .split-bill .output img {
+  width: 100%;
+  border: 1px solid var(--hover-color);
+  border-radius: calc(var(--edge-radius) * 2);
+}
+#root .split-bill .output #output-mermaid {
+  background-color: var(--output-bg);
+  border-radius: var(--edge-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+#root .split-bill .output #output-mermaid svg div {
+  color: var(--text-pri);
+}
+#root .split-bill .output #output-mermaid svg .node circle {
+  fill: var(--output-circle-color);
+  stroke: var(--output-border-color);
+}
+#root .split-bill .output #output-mermaid svg .arrowheadPath {
+  fill: var(--output-arrow-color);
+}
+#root .split-bill .output #output-mermaid svg .edgePath .path {
+  stroke: var(--output-arrow-color);
+}
+#root .split-bill .output #output-mermaid svg .edgeLabel {
+  color: var(--text-pri);
+  background-color: var(--output-bg);
+  text-align: center;
+}
+#root .split-bill .output #output-mermaid svg .edgeLabel .rect {
+  opacity: 0.5;
+  background-color: var(--output-bg);
+  fill: var(--output-bg);
+}
+#root .split-bill .bills {
+  color: var(--text-pri);
+}
+#root .split-bill .bills .bill {
+  padding: 4px;
+  border: 1.6px solid var(--hover-color);
+  border-radius: calc(var(--edge-radius) * 1.618);
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+#root .split-bill .bills .bill input {
+  color: var(--text-pri);
+  background-color: transparent;
+  margin-bottom: 10px;
+  border: none;
+}
+#root .split-bill .bills .bill input:focus {
+  color: var(--text-pri);
+  border: none;
+  outline: none;
+}
+#root .split-bill .bills .bill .title {
+  font-size: 25.888px;
+}
+#root .split-bill .bills .bill .error {
+  font-size: 12px;
+  color: var(--alert-color);
+}
+#root .split-bill .bills .bill .payers-amount-list {
+  display: flex;
+  flex-direction: column;
+}
+#root .split-bill .bills .bill .btns {
+  margin-top: 4px;
+}
+#root .split-bill .bills .bill .btns button {
+  background-color: transparent;
+  color: var(--text-sec);
+  border: 1px solid var(--text-sec);
+  border-radius: var(--edge-radius);
+}
+#root .split-bill .bills .bill .btns .remove-bill {
+  border-color: var(--alert-color);
+  color: var(--alert-color);
+}
+#root .split-bill .bills .bill .btns .save-bill {
+  border-color: var(--text-sec);
+  color: var(--text-sec);
+}
+#root .split-bill .bills .bill .btns .save-bill.continue {
+  border-color: var(--btn-color);
+  color: var(--btn-color);
+}/*# sourceMappingURL=splitbill-root.css.map */

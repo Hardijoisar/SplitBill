@@ -1,0 +1,116 @@
+// main.scss
+
+#root {
+    .main {
+        width: var(--width-percent);
+        max-width: var(--max-width);
+        display: flex;
+        flex-direction: column;
+
+        .title {
+            color: var(--text-pri);
+            margin: 10px 0;
+            font-size: 32px;
+        }
+        .description {
+            margin: 20px 0;
+            color: var(--text-sec);
+            span {
+                color: var(--text-pri);
+            }
+
+            a {
+                padding: 2px;
+                border-radius: var(--edge-radius);
+                color: var(--text-sec);
+                text-decoration: none;
+                &:hover {
+                    cursor: pointer;
+                    background-color: var(--hover-color);
+                }
+            }
+        }
+
+        .title-n-create-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .title {
+                color: var(--text-pri);
+                margin: 10px 0;
+                font-size: 32px;
+            }
+
+            #new-splitbill {
+                background-color: var(--btn-color);
+                padding: 6px 8px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-around;
+                border-radius: var(--edge-radius);
+                color: white;
+
+                &:hover {
+                    cursor: pointer;
+                    background-color: var(--btn-hover-color);
+                }
+            }
+        }
+
+        #splitbills {
+            color: var(--text-pri);
+            .zero-bill {
+                color: var(--text-sec);
+                margin: 20px 0;
+            }
+
+            .card {
+                width: 100%;
+                border: 1px solid var(--hover-color);
+                border-radius: var(--edge-radius);
+                color: var(--text-pri);
+                background-color: var(--body-color);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-around;
+                padding: 4px;
+
+                .content {
+                    width: 96%;
+                    .name-n-btns {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        .name {
+                            color: var(--text-pri);
+                        }
+                        .btns {
+                            display: flex;
+                            align-items: center;
+                            div {
+                                padding: 2px;
+                                margin: 0 2px;
+                                &:hover {
+                                    cursor: pointer;
+                                }
+                            }
+                            .dlt-btn {
+                                &:hover {
+                                    background-color: var(--alert-color);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &:hover {
+                    cursor: pointer;
+                    box-shadow: 0px 1px 8px 0px var(--hover-color);
+                }
+            }
+        }
+    }
+}

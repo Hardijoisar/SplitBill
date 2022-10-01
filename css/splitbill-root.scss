@@ -1,0 +1,213 @@
+// splitbill-root.scss
+
+#root {
+    .split-bill {
+        margin: 6px 0;
+        width: var(--width-percent);
+        max-width: var(--max-width);
+        .icon-info {
+            display: flex;
+            // background-color: blue;
+            #add-icon {
+                border: none;
+                background-color: transparent;
+                color: var(--text-sec);
+                border-radius: var(--edge-radius);
+                margin-right: 16px;
+                border: 1px solid var(--hover-color);
+                &.no-image {
+                    border: 1px solid var(--hover-color);
+                    &:hover {
+                        background-color: var(--hover-color);
+                    }
+                }
+                &.has-image {
+                    --icon-size: 80px;
+                    width: var(--icon-size);
+                    height: var(--icon-size);
+                    font-size: 0;
+                    background-color: var(--hover-color);
+                    background-image: url("https://opengraph.githubassets.com/1/patelka2211/Colab_plus_plus");
+                    background-size: cover;
+                }
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .icon-options {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                width: calc(100% - 80px);
+                max-width: 230px;
+                input {
+                    color: var(--text-pri);
+                    width: 100%;
+                    padding: 4px 0;
+                    padding-left: 4px;
+                    margin-bottom: 4px;
+                    background-color: transparent;
+                    border: 1.6px solid var(--hover-color);
+                    border-radius: var(--edge-radius);
+                    &:focus {
+                        border: 1.6px solid transparent;
+                        outline: 1.6px solid var(--btn-color);
+                    }
+                }
+                .btns {
+                    button {
+                        border: 1px solid var(--hover-color);
+                        border-radius: var(--edge-radius);
+                        background-color: transparent;
+                        color: var(--text-sec);
+                        border-radius: var(--edge-radius);
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+
+                    .remove-btn {
+                        border-color: var(--alert-color);
+                        color: var(--alert-color);
+                    }
+
+                    .save-image-btn {
+                        border-color: var(--btn-color);
+                        color: var(--btn-color);
+                    }
+                }
+
+                &.hide {
+                    display: none;
+                }
+            }
+        }
+
+        #splitbill-title {
+            background-color: var(--body-color);
+            color: var(--text-pri);
+            font-size: 32px;
+            margin: 16px 0;
+            width: 100%;
+            border: none;
+            &:focus {
+                border: none;
+                outline: none;
+            }
+        }
+
+        .output {
+            img {
+                width: 100%;
+                border: 1px solid var(--hover-color);
+                border-radius: calc(var(--edge-radius) * 2);
+            }
+
+            #output-mermaid {
+                background-color: var(--output-bg);
+                border-radius: var(--edge-radius);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-around;
+
+                svg {
+                    div {
+                        color: var(--text-pri);
+                    }
+                    .node {
+                        circle {
+                            fill: var(--output-circle-color);
+                            stroke: var(--output-border-color);
+                        }
+                    }
+
+                    .arrowheadPath {
+                        fill: var(--output-arrow-color);
+                    }
+
+                    .edgePath {
+                        .path {
+                            stroke: var(--output-arrow-color);
+                        }
+                    }
+
+                    .edgeLabel {
+                        color: var(--text-pri);
+                        background-color: var(--output-bg);
+                        text-align: center;
+                        .rect {
+                            opacity: 0.5;
+                            background-color: var(--output-bg);
+                            fill: var(--output-bg);
+                        }
+                    }
+                }
+            }
+        }
+
+        .bills {
+            color: var(--text-pri);
+            .bill {
+                padding: 4px;
+                border: 1.6px solid var(--hover-color);
+                border-radius: calc(var(--edge-radius) * 1.618);
+                margin: 10px 0;
+                display: flex;
+                flex-direction: column;
+
+                input {
+                    color: var(--text-pri);
+                    background-color: transparent;
+                    margin-bottom: 10px;
+                    border: none;
+                    &:focus {
+                        color: var(--text-pri);
+                        border: none;
+                        outline: none;
+                    }
+                }
+                .title {
+                    font-size: calc(16px * 1.618);
+                }
+
+                .error {
+                    font-size: 12px;
+                    color: var(--alert-color);
+                }
+
+                .payers-amount-list {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .btns {
+                    margin-top: 4px;
+
+                    button {
+                        background-color: transparent;
+                        color: var(--text-sec);
+                        border: 1px solid var(--text-sec);
+                        border-radius: var(--edge-radius);
+                    }
+
+                    .remove-bill {
+                        border-color: var(--alert-color);
+                        color: var(--alert-color);
+                    }
+
+                    .save-bill {
+                        border-color: var(--text-sec);
+                        color: var(--text-sec);
+
+                        &.continue {
+                            border-color: var(--btn-color);
+                            color: var(--btn-color);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+:root {
+  --body-color: white;
+  --hover-color: rgba(128, 128, 128, 0.16);
+  --text-pri: black;
+  --text-sec: rgba(128, 128, 128, 0.8);
+  --output-bg: rgb(246, 246, 244);
+  --output-border-color: rgb(166, 166, 166);
+  --output-arrow-color: rgb(51, 51, 51);
+  --output-circle-color: var(--output-bg);
+}
+
+.dark-mode {
+  --body-color: rgb(25, 25, 25);
+  --hover-color: rgba(155, 155, 155, 0.2);
+  --text-pri: white;
+  --text-sec: rgba(155, 155, 155, 1);
+  --output-bg: rgb(32, 32, 32);
+  --output-border-color: rgb(124, 154, 188);
+  --output-arrow-color: rgb(112, 111, 111);
+  --output-circle-color: var(--output-bg);
+}
+
+* {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  --edge-radius: 4px;
+  --alert-color: rgba(219, 97, 92);
+  --btn-color: rgba(65, 129, 220, 1);
+  --btn-hover-color: rgba(49, 112, 203, 1);
+  --max-width: 640px;
+  --width-percent: 84%;
+}
+
+body {
+  background-color: var(--body-color);
+}
+body #root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body #root .space {
+  height: 52px;
+}/*# sourceMappingURL=common.css.map */

@@ -1,0 +1,100 @@
+// header.scss
+
+#root {
+    .header {
+        background-color: var(--body-color);
+        position: fixed;
+        width: 100vw;
+        height: 52px;
+        // border-bottom: 1px solid black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        .header-content {
+            width: var(--width-percent);
+            max-width: var(--max-width);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .icon-title-n-btn {
+                display: flex;
+                justify-content: space-between;
+                .icon-n-title {
+                    display: flex;
+                    align-items: center;
+                    #header-icon {
+                        margin: 2px;
+                        --header-icon-size: 26px;
+                        width: var(--header-icon-size);
+                        height: var(--header-icon-size);
+                        border-radius: var(--edge-radius);
+                        background-color: var(--hover-color);
+                        // background-color: var(--body-color);
+                        // background-image: url("https://avatars.githubusercontent.com/u/82671701");
+                        background-size: contain;
+                    }
+
+                    #header-title {
+                        border: none;
+                        color: var(--text-pri);
+                        margin: 4px;
+                        font-size: 20px;
+                        &:hover {
+                            cursor: default;
+                        }
+
+                        max-width: 320px;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        white-space: nowrap;
+                    }
+
+                    #saved-status {
+                        margin: 4px;
+                        font-size: 12px;
+                        color: var(--text-sec);
+                        &.cant-save {
+                            color: var(--alert-color);
+                        }
+                        &:hover {
+                            cursor: default;
+                        }
+                    }
+                }
+
+                #options-btn {
+                    display: none;
+                }
+            }
+
+            #options {
+                display: flex;
+                a,
+                div {
+                    padding: 4px;
+                    margin: 2px;
+                    text-decoration: none;
+                    border-radius: var(--edge-radius);
+                    color: var(--text-pri);
+                    &:hover {
+                        background-color: var(--hover-color);
+                        cursor: pointer;
+                    }
+                }
+
+                #theme-toggle {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: space-around;
+                    svg {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
