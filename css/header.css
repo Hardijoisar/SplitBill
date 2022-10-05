@@ -23,19 +23,32 @@
   display: flex;
   align-items: center;
 }
-#root .header .header-content .icon-title-n-btn .icon-n-title #header-icon {
-  margin: 2px;
+#root .header .header-content .icon-title-n-btn .icon-n-title #header-icon-div {
+  margin: 0 2px;
   --header-icon-size: 26px;
   width: var(--header-icon-size);
   height: var(--header-icon-size);
   border-radius: var(--edge-radius);
   background-color: var(--hover-color);
-  background-size: contain;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+#root .header .header-content .icon-title-n-btn .icon-n-title #header-icon-div #header-icon {
+  border-radius: var(--edge-radius);
+  width: var(--header-icon-size);
+}
+#root .header .header-content .icon-title-n-btn .icon-n-title #header-icon-div.clickable:hover {
+  cursor: pointer;
+}
+#root .header .header-content .icon-title-n-btn .icon-n-title #header-icon-div.has-image {
+  background-color: transparent;
 }
 #root .header .header-content .icon-title-n-btn .icon-n-title #header-title {
   border: none;
   color: var(--text-pri);
-  margin: 4px;
+  margin: 0 4px;
   font-size: 20px;
   max-width: 320px;
   text-overflow: ellipsis;
@@ -45,16 +58,8 @@
 #root .header .header-content .icon-title-n-btn .icon-n-title #header-title:hover {
   cursor: default;
 }
-#root .header .header-content .icon-title-n-btn .icon-n-title #saved-status {
-  margin: 4px;
-  font-size: 12px;
-  color: var(--text-sec);
-}
-#root .header .header-content .icon-title-n-btn .icon-n-title #saved-status.cant-save {
-  color: var(--alert-color);
-}
-#root .header .header-content .icon-title-n-btn .icon-n-title #saved-status:hover {
-  cursor: default;
+#root .header .header-content .icon-title-n-btn .icon-n-title #header-title.clickable:hover {
+  cursor: pointer;
 }
 #root .header .header-content .icon-title-n-btn #options-btn {
   display: none;

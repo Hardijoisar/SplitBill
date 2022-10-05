@@ -3,75 +3,58 @@
   width: var(--width-percent);
   max-width: var(--max-width);
 }
-#root .split-bill .icon-info {
-  display: flex;
+#root .split-bill #save-warning {
+  padding: 8px;
+  margin-bottom: 10px;
+  color: white;
+  background-color: var(--alert-color);
+  border: 1px solid var(--alert-color);
+  border-radius: calc(var(--edge-radius) * 1.618);
+  opacity: 1;
 }
-#root .split-bill .icon-info #add-icon {
-  border: none;
-  background-color: transparent;
-  color: var(--text-sec);
-  border-radius: var(--edge-radius);
-  margin-right: 16px;
-  border: 1px solid var(--hover-color);
+#root .split-bill #save-warning.hide {
+  opacity: 0;
+  transition: 8s opacity ease;
 }
-#root .split-bill .icon-info #add-icon.no-image {
-  border: 1px solid var(--hover-color);
-}
-#root .split-bill .icon-info #add-icon.no-image:hover {
-  background-color: var(--hover-color);
-}
-#root .split-bill .icon-info #add-icon.has-image {
-  --icon-size: 80px;
-  width: var(--icon-size);
-  height: var(--icon-size);
-  font-size: 0;
-  background-color: var(--hover-color);
-  background-image: url("https://opengraph.githubassets.com/1/patelka2211/Colab_plus_plus");
-  background-size: cover;
-}
-#root .split-bill .icon-info #add-icon:hover {
-  cursor: pointer;
-}
-#root .split-bill .icon-info .icon-options {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  width: calc(100% - 80px);
+#root .split-bill #icon-info {
   max-width: 230px;
 }
-#root .split-bill .icon-info .icon-options input {
+#root .split-bill #icon-info input {
   color: var(--text-pri);
   width: 100%;
-  padding: 4px 0;
-  padding-left: 4px;
+  padding: 4px;
   margin-bottom: 4px;
   background-color: transparent;
   border: 1.6px solid var(--hover-color);
   border-radius: var(--edge-radius);
 }
-#root .split-bill .icon-info .icon-options input:focus {
+#root .split-bill #icon-info input:focus {
   border: 1.6px solid transparent;
   outline: 1.6px solid var(--btn-color);
 }
-#root .split-bill .icon-info .icon-options .btns button {
+#root .split-bill #icon-info .btns button {
   border: 1px solid var(--hover-color);
   border-radius: var(--edge-radius);
   background-color: transparent;
   color: var(--text-sec);
   border-radius: var(--edge-radius);
 }
-#root .split-bill .icon-info .icon-options .btns button:hover {
+#root .split-bill #icon-info .btns button:hover {
   cursor: pointer;
 }
-#root .split-bill .icon-info .icon-options .btns .remove-btn {
+#root .split-bill #icon-info .btns .remove-btn {
   border-color: var(--alert-color);
   color: var(--alert-color);
 }
-#root .split-bill .icon-info .icon-options .btns .save-image-btn {
+#root .split-bill #icon-info .btns .save-image-btn {
   border-color: var(--btn-color);
   color: var(--btn-color);
 }
-#root .split-bill .icon-info .icon-options.hide {
+#root .split-bill #icon-info .btns .save-image-btn.disable {
+  border-color: var(--hover-color);
+  color: var(--hover-color);
+}
+#root .split-bill #icon-info.hide {
   display: none;
 }
 #root .split-bill #splitbill-title {
@@ -122,10 +105,10 @@
   background-color: var(--output-bg);
   fill: var(--output-bg);
 }
-#root .split-bill .bills {
+#root .split-bill #bills {
   color: var(--text-pri);
 }
-#root .split-bill .bills .bill {
+#root .split-bill #bills .bill {
   padding: 4px;
   border: 1.6px solid var(--hover-color);
   border-radius: calc(var(--edge-radius) * 1.618);
@@ -133,46 +116,72 @@
   display: flex;
   flex-direction: column;
 }
-#root .split-bill .bills .bill input {
+#root .split-bill #bills .bill input {
   color: var(--text-pri);
   background-color: transparent;
   margin-bottom: 10px;
   border: none;
 }
-#root .split-bill .bills .bill input:focus {
+#root .split-bill #bills .bill input:focus {
   color: var(--text-pri);
   border: none;
   outline: none;
 }
-#root .split-bill .bills .bill .title {
+#root .split-bill #bills .bill .title {
   font-size: 25.888px;
 }
-#root .split-bill .bills .bill .error {
+#root .split-bill #bills .bill .error {
+  display: none;
   font-size: 12px;
+  margin: 8px 0;
   color: var(--alert-color);
 }
-#root .split-bill .bills .bill .payers-amount-list {
+#root .split-bill #bills .bill .payers-amount-list {
   display: flex;
   flex-direction: column;
 }
-#root .split-bill .bills .bill .btns {
+#root .split-bill #bills .bill .btns {
   margin-top: 4px;
 }
-#root .split-bill .bills .bill .btns button {
+#root .split-bill #bills .bill .btns button {
   background-color: transparent;
   color: var(--text-sec);
   border: 1px solid var(--text-sec);
   border-radius: var(--edge-radius);
 }
-#root .split-bill .bills .bill .btns .remove-bill {
+#root .split-bill #bills .bill .btns .remove-bill {
   border-color: var(--alert-color);
   color: var(--alert-color);
 }
-#root .split-bill .bills .bill .btns .save-bill {
+#root .split-bill #bills .bill .btns .remove-bill:hover {
+  cursor: pointer;
+}
+#root .split-bill #bills .bill .btns .save-bill {
+  border-color: var(--btn-color);
+  color: var(--btn-color);
+}
+#root .split-bill #bills .bill .btns .save-bill.disable {
   border-color: var(--text-sec);
   color: var(--text-sec);
 }
-#root .split-bill .bills .bill .btns .save-bill.continue {
-  border-color: var(--btn-color);
-  color: var(--btn-color);
+#root .split-bill #bills .bill .btns .save-bill.disable:hover {
+  cursor: default;
+}
+#root .split-bill #bills .bill .btns .save-bill:hover {
+  cursor: pointer;
+}
+#root .split-bill #new-bill-btn {
+  font-size: 16px;
+  color: white;
+  background-color: var(--btn-color);
+  border: none;
+  border-radius: var(--edge-radius);
+  --vertical-padding: 8px;
+  --horizontal-padding: calc(var(--vertical-padding) * 1.618);
+  padding: var(--vertical-padding) var(--horizontal-padding);
+  margin: 0 auto;
+}
+#root .split-bill #new-bill-btn:hover {
+  cursor: pointer;
+  background-color: var(--btn-hover-color);
 }/*# sourceMappingURL=splitbill-root.css.map */

@@ -16,7 +16,7 @@ class Database {
     }
 
     get(key) {
-        if (key in this.storage_plan) {
+        if (this.storage_plan.hasOwnProperty(key)) {
             try {
                 return JSON.parse(this.storage_plan.getItem(key));
             } catch (error) {
@@ -29,9 +29,8 @@ class Database {
     clear() {
         return this.storage_plan.clear();
     }
-}
 
-// graph RL
-//     C[C]--> |140 Rs| B[B]
-//     D[D]--> |60 Rs| B[B]
-//     D[D]--> |80 Rs| A[A]
+    has(key) {
+        return this.storage_plan.hasOwnProperty(key);
+    }
+}

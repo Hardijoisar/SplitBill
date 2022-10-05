@@ -7,12 +7,7 @@ class url_manager {
         this.update_params();
     }
 
-    strict_set_params(obj) {
-        this.clear();
-        this.set_params(obj);
-    }
-
-    set_params(obj) {
+    set_params(obj, strict = false) {
         let new_obj = this.get_params(),
             new_params = "?";
 
@@ -28,7 +23,18 @@ class url_manager {
                 (index == entries.length - 1 ? "" : "&");
         }
 
-        history.pushState({}, null, `${window.location.pathname}${new_params}`);
+        if (strict)
+            history.replaceState(
+                {},
+                null,
+                `${window.location.pathname}${new_params}`
+            );
+        else
+            history.pushState(
+                {},
+                null,
+                `${window.location.pathname}${new_params}`
+            );
         this.update_params();
     }
 
@@ -41,6 +47,7 @@ class url_manager {
     }
 
     is_empty() {
+        this.update_params();
         let empty_or_not = true;
 
         for (const item of this.params.keys()) {
@@ -51,6 +58,7 @@ class url_manager {
     }
 
     get_params() {
+        this.update_params();
         if (this.is_empty()) {
             return {};
         }
@@ -76,7 +84,6 @@ let url_manager_obj = new url_manager();
 /*
 // Detect url changes
 window.addEventListener("popstate", (e) => {
-    console.log(e);
-    console.log(e.path[0]);
+    console.log(url_manager_obj.get_params());
 });
 */

@@ -52,6 +52,10 @@ class color_theme {
         setTimeout(() => {
             this.default();
         }, 100);
+
+        // setInterval(() => {
+        //     this.default();
+        // }, 200);
     }
 
     default() {

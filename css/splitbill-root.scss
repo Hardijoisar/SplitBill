@@ -5,82 +5,65 @@
         margin: 6px 0;
         width: var(--width-percent);
         max-width: var(--max-width);
-        .icon-info {
-            display: flex;
-            // background-color: blue;
-            #add-icon {
-                border: none;
+
+        #save-warning {
+            padding: 8px;
+            margin-bottom: 10px;
+            color: white;
+            background-color: var(--alert-color);
+            border: 1px solid var(--alert-color);
+            border-radius: calc(var(--edge-radius) * 1.618);
+            opacity: 1;
+            &.hide {
+                opacity: 0;
+                transition: 8s opacity ease;
+            }
+        }
+
+        #icon-info {
+            max-width: 230px;
+            input {
+                color: var(--text-pri);
+                width: 100%;
+                padding: 4px;
+                margin-bottom: 4px;
                 background-color: transparent;
-                color: var(--text-sec);
+                border: 1.6px solid var(--hover-color);
                 border-radius: var(--edge-radius);
-                margin-right: 16px;
-                border: 1px solid var(--hover-color);
-                &.no-image {
+                &:focus {
+                    border: 1.6px solid transparent;
+                    outline: 1.6px solid var(--btn-color);
+                }
+            }
+            .btns {
+                button {
                     border: 1px solid var(--hover-color);
+                    border-radius: var(--edge-radius);
+                    background-color: transparent;
+                    color: var(--text-sec);
+                    border-radius: var(--edge-radius);
                     &:hover {
-                        background-color: var(--hover-color);
+                        cursor: pointer;
                     }
                 }
-                &.has-image {
-                    --icon-size: 80px;
-                    width: var(--icon-size);
-                    height: var(--icon-size);
-                    font-size: 0;
-                    background-color: var(--hover-color);
-                    background-image: url("https://opengraph.githubassets.com/1/patelka2211/Colab_plus_plus");
-                    background-size: cover;
+
+                .remove-btn {
+                    border-color: var(--alert-color);
+                    color: var(--alert-color);
                 }
-                &:hover {
-                    cursor: pointer;
+
+                .save-image-btn {
+                    border-color: var(--btn-color);
+                    color: var(--btn-color);
+                    &.disable {
+                        border-color: var(--hover-color);
+                        color: var(--hover-color);
+                    }
                 }
             }
 
-            .icon-options {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-end;
-                width: calc(100% - 80px);
-                max-width: 230px;
-                input {
-                    color: var(--text-pri);
-                    width: 100%;
-                    padding: 4px 0;
-                    padding-left: 4px;
-                    margin-bottom: 4px;
-                    background-color: transparent;
-                    border: 1.6px solid var(--hover-color);
-                    border-radius: var(--edge-radius);
-                    &:focus {
-                        border: 1.6px solid transparent;
-                        outline: 1.6px solid var(--btn-color);
-                    }
-                }
-                .btns {
-                    button {
-                        border: 1px solid var(--hover-color);
-                        border-radius: var(--edge-radius);
-                        background-color: transparent;
-                        color: var(--text-sec);
-                        border-radius: var(--edge-radius);
-                        &:hover {
-                            cursor: pointer;
-                        }
-                    }
-
-                    .remove-btn {
-                        border-color: var(--alert-color);
-                        color: var(--alert-color);
-                    }
-
-                    .save-image-btn {
-                        border-color: var(--btn-color);
-                        color: var(--btn-color);
-                    }
-                }
-
-                &.hide {
-                    display: none;
-                }
+            &.hide {
+                display: none;
             }
         }
 
@@ -147,7 +130,7 @@
             }
         }
 
-        .bills {
+        #bills {
             color: var(--text-pri);
             .bill {
                 padding: 4px;
@@ -173,7 +156,9 @@
                 }
 
                 .error {
+                    display: none;
                     font-size: 12px;
+                    margin: 8px 0;
                     color: var(--alert-color);
                 }
 
@@ -195,18 +180,46 @@
                     .remove-bill {
                         border-color: var(--alert-color);
                         color: var(--alert-color);
+
+                        &:hover {
+                            cursor: pointer;
+                        }
                     }
 
                     .save-bill {
-                        border-color: var(--text-sec);
-                        color: var(--text-sec);
+                        border-color: var(--btn-color);
+                        color: var(--btn-color);
 
-                        &.continue {
-                            border-color: var(--btn-color);
-                            color: var(--btn-color);
+                        &.disable {
+                            border-color: var(--text-sec);
+                            color: var(--text-sec);
+                            &:hover {
+                                cursor: default;
+                            }
+                        }
+
+                        &:hover {
+                            cursor: pointer;
                         }
                     }
                 }
+            }
+        }
+
+        #new-bill-btn {
+            font-size: 16px;
+            color: white;
+            background-color: var(--btn-color);
+            border: none;
+            border-radius: var(--edge-radius);
+            --vertical-padding: 8px;
+            --horizontal-padding: calc(var(--vertical-padding) * 1.618);
+            padding: var(--vertical-padding) var(--horizontal-padding);
+            margin: 0 auto;
+
+            &:hover {
+                cursor: pointer;
+                background-color: var(--btn-hover-color);
             }
         }
     }
