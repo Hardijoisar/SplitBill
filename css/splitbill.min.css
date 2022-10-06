@@ -391,13 +391,22 @@ body #root .space {
   border-color: var(--alert-color);
   color: var(--alert-color);
 }
+#root .split-bill #bills .bill .btns .remove-bill:hover {
+  cursor: pointer;
+}
 #root .split-bill #bills .bill .btns .save-bill {
+  border-color: var(--btn-color);
+  color: var(--btn-color);
+}
+#root .split-bill #bills .bill .btns .save-bill.disable {
   border-color: var(--text-sec);
   color: var(--text-sec);
 }
-#root .split-bill #bills .bill .btns .save-bill.continue {
-  border-color: var(--btn-color);
-  color: var(--btn-color);
+#root .split-bill #bills .bill .btns .save-bill.disable:hover {
+  cursor: default;
+}
+#root .split-bill #bills .bill .btns .save-bill:hover {
+  cursor: pointer;
 }
 #root .split-bill #new-bill-btn {
   font-size: 16px;

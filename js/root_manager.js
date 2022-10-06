@@ -254,7 +254,6 @@ class Root_manager {
                 } catch (error) {}
             }, 6 * 1000);
         } else {
-            console.log("Can't open ", split_id);
             this.url_manager.clear(true);
             this.set_home();
         }

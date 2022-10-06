@@ -103,20 +103,43 @@ class Splitbills {
         let bills = this.database_obj.get(this.split_id).bills;
         document.getElementById("bills").innerHTML = "";
 
+        let name_list_to_string = (name_list) => {
+            let output = "";
+            for (let index = 0; index < name_list.length; index++) {
+                output += (index == 0 ? "" : ", ") + name_list[index];
+            }
+            return output;
+        };
+
+        let get_amount_list = (amount_list, bill_id) => {
+            let output = "";
+            for (let index = 0; index < amount_list.length; index++) {
+                output += `<input id="bill-${bill_id}-payer-${index}" type="text" placeholder="${bills[bill_id].payers[index]}'s amount" value="${bills[bill_id].payers_amnt[index]}" onkeyup="splitbills_obj.update_payer_amount('${bill_id}', ${index});"></input>`;
+            }
+            return output;
+        };
+
         Object.keys(bills).forEach((bill_id) => {
             document.getElementById(
                 "bills"
             ).innerHTML += `<div id="bill-${bill_id}" class="bill">
-                                <input id="bill-${bill_id}-name" class="title" type="text" placeholder="Enter bill title" value="${bills[bill_id].name}" onkeyup="splitbills_obj.update_bill_name('${bill_id}', this.value);">
+                                <input id="bill-${bill_id}-name" class="title" type="text" placeholder="Enter bill title" value="${
+                bills[bill_id].name
+            }" onkeyup="splitbills_obj.update_bill_name('${bill_id}', this.value);">
                                 <input id="bill-${bill_id}-payers" class="payers" type="text"
-                                    placeholder="Enter payers (eg. John Doe, Jane Doe)" value="${bills[bill_id].payers}" onkeyup="splitbills_obj.update_payers_name('${bill_id}');">
+                                    placeholder="Enter payers (eg. John Doe, Jane Doe)" value="${name_list_to_string(
+                                        bills[bill_id].payers
+                                    )}" onkeyup="splitbills_obj.update_payers_name('${bill_id}');">
                                 <div id="bill-${bill_id}-payers-amount" class="payers-amount-list">
-                                <!-- <input id="bill-${bill_id}-payer-0" class="John-Doe-amount" type="text" placeholder="John Doe's amount">
-                                    <input id="bill-${bill_id}-payer-1" class="Jane-Doe-amount" type="text" placeholder="Jane Doe's amount"> -->
-                                </div>
-                                <input class="total-cost" type="text" placeholder="Total cost">
+                                ${get_amount_list(
+                                    bills[bill_id].payers_amnt,
+                                    bill_id
+                                )}</div>
+                                <input class="bill-${bill_id}-payees" type="text" placeholder="Enter payees (eg. John Doe, Jane Doe)" value="${name_list_to_string(
+                bills[bill_id].payees
+            )}" onkeyup="splitbills_obj.update_payees_name('${bill_id}', this.value);">
+                                <input class="total-cost" type="text" placeholder="Total amount">
                                 <div id="bill-${bill_id}-error" class="error">Total cost must be less than or equal to 1500.</div>
-                                <input class="bill-${bill_id}-payees" type="text" placeholder="Enter payees (eg. John Doe, Jane Doe)" value="${bills[bill_id].payees}">
                                 <div class="btns">
                                     <button class="remove-bill" onclick="splitbills_obj.remove_bill('${bill_id}');" id="remove-bill-${bill_id}">Remove</button>
                                     <button class="save-bill disable" disabled id="save-bill-${bill_id}">Save</button>
@@ -155,16 +178,16 @@ class Splitbills {
         let split_obj = this.database_obj.get(this.split_id),
             bills_obj = split_obj.bills[bill_id];
 
-        let name_id = (name) => {
-            name = name.toLowerCase();
-            name = name.replaceAll(" ", "-");
-            return name;
-        };
+        // let name_id = (name) => {
+        //     name = name.toLowerCase();
+        //     name = name.replaceAll(" ", "-");
+        //     return name;
+        // };
 
-        let payers_list_obj = payers_list.split(","),
-            new_payers_list = "";
+        let payers_list_obj = payers_list.split(",");
 
-        let payers_amnt_div_html = "";
+        let payers_amnt_div_html = "",
+            payers_amnt_list = [];
 
         for (let index = 0; index < payers_list_obj.length; ) {
             payers_list_obj[index] = payers_list_obj[index].trim();
@@ -180,20 +203,68 @@ class Splitbills {
                     ).value;
                 } catch (error) {}
 
-                payers_amnt_div_html += `<input id="bill-${bill_id}-payer-${index}" type="text" placeholder="${payers_list_obj[index]}'s amount" value="${default_value}">`;
-                new_payers_list +=
-                    (index == 0 ? "" : ", ") + payers_list_obj[index];
+                payers_amnt_div_html += `<input id="bill-${bill_id}-payer-${index}" type="text" placeholder="${payers_list_obj[index]}'s amount" value="${default_value}" onkeyup="splitbills_obj.update_payer_amount('${bill_id}', ${index});">`;
+
+                payers_amnt_list.push(default_value);
                 index++;
             }
         }
 
         payers_amnt_div.innerHTML = payers_amnt_div_html;
 
-        bills_obj.payers = new_payers_list;
+        bills_obj.payers = payers_list_obj;
+
+        bills_obj.payers_amnt = payers_amnt_list;
 
         split_obj.bills[bill_id] = bills_obj;
 
         this.database_obj.set(this.split_id, split_obj);
+    }
+
+    update_payer_amount(bill_id, amount_index) {
+        let split_obj = this.database_obj.get(this.split_id);
+        let bill = split_obj.bills[bill_id];
+
+        bill.payers_amnt[amount_index] = document.getElementById(
+            `bill-${bill_id}-payer-${amount_index}`
+        ).value;
+
+        this.database_obj.set(this.split_id, split_obj);
+    }
+
+    update_payees_name(bill_id, payees_list = null) {
+        if (payees_list == null) {
+            payees_list = document.getElementById(
+                `bill-${bill_id}-payees`
+            ).value;
+        }
+
+        let split_obj = this.database_obj.get(this.split_id),
+            bills_obj = split_obj.bills[bill_id];
+
+        let payees_list_obj = payees_list.split(",");
+
+        for (let index = 0; index < payees_list_obj.length; ) {
+            payees_list_obj[index] = payees_list_obj[index].trim();
+            payees_list_obj[index] = payees_list_obj[index].replace(/ +/d, " ");
+
+            if (payees_list_obj[index] == "") {
+                payees_list_obj.splice(index, 1);
+            } else {
+                index++;
+            }
+        }
+
+        bills_obj.payees = payees_list_obj;
+
+        split_obj.bills[bill_id] = bills_obj;
+        this.database_obj.set(this.split_id, split_obj);
+    }
+
+    check_for_saving(bill_id) {
+        let split_obj = this.database_obj.get(this.split_id);
+
+        let bill = split_obj.bills[bill_id];
     }
 
     remove_bill(bill_id) {
@@ -235,9 +306,9 @@ class Splitbills {
                               <!-- <input id="bill-${bill_id}-payer-0" class="John-Doe-amount" type="text" placeholder="John Doe's amount">
                               <input id="bill-${bill_id}-payer-1" class="Jane-Doe-amount" type="text" placeholder="Jane Doe's amount"> -->
                           </div>
-                          <input class="total-cost" type="text" placeholder="Total cost">
+                          <input class="bill-${bill_id}-payees" type="text" placeholder="Enter payees (eg. John Doe, Jane Doe)" onkeyup="splitbills_obj.update_payees_name('${bill_id}', this.value);">
+                          <input class="total-cost" type="text" placeholder="Total amount">
                           <div id="bill-${bill_id}-error" class="error">Total cost must be less than or equal to 1500.</div>
-                          <input class="bill-${bill_id}-payees" type="text" placeholder="Enter payees (eg. John Doe, Jane Doe)">
                           <div class="btns">
                               <button class="remove-bill" onclick="splitbills_obj.remove_bill('${bill_id}');" id="remove-bill-${bill_id}">Remove</button>
                               <button class="save-bill disable" disabled id="save-bill-${bill_id}">Save</button>
