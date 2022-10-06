@@ -156,10 +156,12 @@
                 }
 
                 .error {
-                    display: none;
                     font-size: 12px;
                     margin: 8px 0;
                     color: var(--alert-color);
+                    &.hide {
+                        display: none;
+                    }
                 }
 
                 .payers-amount-list {

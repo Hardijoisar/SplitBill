@@ -135,11 +135,13 @@ class Splitbills {
                                     bills[bill_id].payers_amnt,
                                     bill_id
                                 )}</div>
-                                <input class="bill-${bill_id}-payees" type="text" placeholder="Enter payees (eg. John Doe, Jane Doe)" value="${name_list_to_string(
+                                <input id="bill-${bill_id}-payees" type="text" placeholder="Enter payees (eg. John Doe, Jane Doe)" value="${name_list_to_string(
                 bills[bill_id].payees
             )}" onkeyup="splitbills_obj.update_payees_name('${bill_id}', this.value);">
-                                <input class="total-cost" type="text" placeholder="Total amount">
-                                <div id="bill-${bill_id}-error" class="error">Total cost must be less than or equal to 1500.</div>
+                                <input id="bill-${bill_id}-total-amnt" type="text" placeholder="Total amount" onkeyup="splitbills_obj.check_for_saving('${bill_id}', this.value);" value="${
+                bills[bill_id].total_amnt
+            }">
+                                <div id="bill-${bill_id}-error" class="error hide"></div>
                                 <div class="btns">
                                     <button class="remove-bill" onclick="splitbills_obj.remove_bill('${bill_id}');" id="remove-bill-${bill_id}">Remove</button>
                                     <button class="save-bill disable" disabled id="save-bill-${bill_id}">Save</button>
@@ -217,7 +219,6 @@ class Splitbills {
         bills_obj.payers_amnt = payers_amnt_list;
 
         split_obj.bills[bill_id] = bills_obj;
-
         this.database_obj.set(this.split_id, split_obj);
     }
 
@@ -240,7 +241,8 @@ class Splitbills {
         }
 
         let split_obj = this.database_obj.get(this.split_id),
-            bills_obj = split_obj.bills[bill_id];
+            bills_obj = split_obj.bills[bill_id],
+            error_tag = document.getElementById(`bill-${bill_id}-error`);
 
         let payees_list_obj = payees_list.split(",");
 
@@ -255,16 +257,90 @@ class Splitbills {
             }
         }
 
+        if (payees_list_obj.length == 0) {
+            error_tag.innerText = "Enter minimum one payee.";
+            error_tag.classList.remove("hide");
+            return;
+        } else if (payees_list_obj.length != 0) {
+            error_tag.classList.add("hide");
+        }
+
         bills_obj.payees = payees_list_obj;
 
         split_obj.bills[bill_id] = bills_obj;
         this.database_obj.set(this.split_id, split_obj);
     }
 
-    check_for_saving(bill_id) {
-        let split_obj = this.database_obj.get(this.split_id);
+    check_for_saving(bill_id, input_value = null) {
+        if (input_value == null) {
+            input_value = document.getElementById(
+                `bill-${bill_id}-total-amnt`
+            ).value;
+        }
 
-        let bill = split_obj.bills[bill_id];
+        let split_obj = this.database_obj.get(this.split_id),
+            error_tag = document.getElementById(`bill-${bill_id}-error`),
+            input_number,
+            save_btn = document.getElementById(`save-bill-${bill_id}`);
+
+        if (isNaN(+`${input_value}`)) {
+            error_tag.innerText = "Enter number only";
+            error_tag.classList.remove("hide");
+
+            save_btn.disabled = true;
+            save_btn.classList.add("disable");
+            return;
+        } else {
+            error_tag.classList.add("hide");
+            input_number = +`${input_value}`;
+        }
+
+        let bill = split_obj.bills[bill_id],
+            sum = 0;
+
+        if (bill.payers_amnt.length == 0) {
+            error_tag.innerText = "Enter minimum one payer";
+            error_tag.classList.remove("hide");
+
+            save_btn.disabled = true;
+            save_btn.classList.add("disable");
+            return;
+        } else {
+            error_tag.classList.add("hide");
+            input_number = +`${input_value}`;
+        }
+
+        for (let index = 0; index < bill.payers_amnt.length; index++) {
+            if (isNaN(+`${bill.payers_amnt[index]}`)) {
+                error_tag.innerText = "Enter number only in each payer amount";
+                error_tag.classList.remove("hide");
+                document
+                    .getElementById(`bill-${bill_id}-payer-${index}`)
+                    .focus();
+
+                save_btn.disabled = true;
+                save_btn.classList.add("disable");
+                return;
+            }
+            sum += +`${bill.payers_amnt[index]}`;
+        }
+
+        if (input_number > sum || input_number <= 0) {
+            error_tag.innerText = `0 < Total amount <= ${sum}`;
+            error_tag.classList.remove("hide");
+            save_btn.disabled = true;
+            save_btn.classList.add("disable");
+            return;
+        } else {
+            error_tag.classList.add("hide");
+        }
+
+        bill.total_amnt = input_number;
+        split_obj.bills[bill_id] = bill;
+        this.database_obj.set(this.split_id, split_obj);
+
+        save_btn.disabled = false;
+        save_btn.classList.remove("disable");
     }
 
     remove_bill(bill_id) {
@@ -306,9 +382,9 @@ class Splitbills {
                               <!-- <input id="bill-${bill_id}-payer-0" class="John-Doe-amount" type="text" placeholder="John Doe's amount">
                               <input id="bill-${bill_id}-payer-1" class="Jane-Doe-amount" type="text" placeholder="Jane Doe's amount"> -->
                           </div>
-                          <input class="bill-${bill_id}-payees" type="text" placeholder="Enter payees (eg. John Doe, Jane Doe)" onkeyup="splitbills_obj.update_payees_name('${bill_id}', this.value);">
-                          <input class="total-cost" type="text" placeholder="Total amount">
-                          <div id="bill-${bill_id}-error" class="error">Total cost must be less than or equal to 1500.</div>
+                          <input id="bill-${bill_id}-payees" type="text" placeholder="Enter payees (eg. John Doe, Jane Doe)" onkeyup="splitbills_obj.update_payees_name('${bill_id}', this.value);">
+                          <input id="bill-${bill_id}-total-amnt" type="text" placeholder="Total amount" onkeyup="splitbills_obj.check_for_saving('${bill_id}', this.value);">
+                          <div id="bill-${bill_id}-error" class="error hide">Total cost must be less than or equal to 1500.</div>
                           <div class="btns">
                               <button class="remove-bill" onclick="splitbills_obj.remove_bill('${bill_id}');" id="remove-bill-${bill_id}">Remove</button>
                               <button class="save-bill disable" disabled id="save-bill-${bill_id}">Save</button>

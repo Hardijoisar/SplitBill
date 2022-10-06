@@ -369,10 +369,12 @@ body #root .space {
   font-size: 25.888px;
 }
 #root .split-bill #bills .bill .error {
-  display: none;
   font-size: 12px;
   margin: 8px 0;
   color: var(--alert-color);
+}
+#root .split-bill #bills .bill .error.hide {
+  display: none;
 }
 #root .split-bill #bills .bill .payers-amount-list {
   display: flex;
